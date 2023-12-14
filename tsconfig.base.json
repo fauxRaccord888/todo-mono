@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+      "declaration": true,
+      "strict": true,
+      "strictNullChecks": true,
+      "esModuleInterop": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "noUnusedLocals": true,
+      "skipLibCheck": true,
+      "sourceMap": true,
+      "moduleResolution": "node"
+    },
+  }
+  

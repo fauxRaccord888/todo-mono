@@ -1,0 +1,38 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb",
+    "airbnb-typescript"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  
+  
+  "overrides": [
+    {
+      "files" : ["./packages/vue-project/**/*.vue"],
+      "plugins": ["vue"],
+      "extends": [
+        "airbnb",
+        "airbnb-typescript",
+        "plugin:vue/vue3-recommended"
+      ],
+      "parserOptions": {
+          "parser": "@typescript-eslint/parser",
+          "project" : "./packages/vue-project/tsconfig.json",
+          "sourceType": "module",
+          "ecmaVersion": 2018,
+          "ecmaFeatures": {
+              "globalReturn": false,
+              "jsx": true
+          },
+          "extraFileExtensions": [".vue"]
+      }
+    }
+  ]
+}
