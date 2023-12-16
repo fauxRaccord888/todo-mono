@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { addDays } from 'date-fns';
 import { CompletedRecord } from './CompletedRecord';
 import { Tag } from './Tag';

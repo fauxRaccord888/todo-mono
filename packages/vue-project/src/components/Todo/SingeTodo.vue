@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Todo, dueDateFormatter, yyyymmdd } from '@todo-mono/shared';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { todoStore } from '../../utils/store';
 import RoundedContainer from '../common/RoundedContainer.vue';
 import StyledButton from '../common/StyledButton.vue';

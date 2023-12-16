@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import ESSerializer from 'esserializer';
 import { CompletedRecord, Todo, Tag } from '../Class';
 

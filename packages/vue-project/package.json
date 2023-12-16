@@ -12,7 +12,9 @@
     "@todo-mono/shared": "workspace:^",
     "@vitejs/plugin-vue": "^4.5.2",
     "vite": "^5.0.8",
-    "vue": "^3.3.11"
+    "vue": "^3.3.11",
+    "date-fns": "^2.30.0",
+    "esserializer": "^1.3.11"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",

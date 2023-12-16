@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { differenceInDays } from 'date-fns';
 
 export const yyyymmdd = (date: Date) => {
