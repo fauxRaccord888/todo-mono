@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { addDays } from 'date-fns';
 import { CompletedRecord } from './CompletedRecord';
 import { Tag } from './Tag';
 
@@ -30,7 +32,16 @@ export class Todo {
     this.tags = props.tags;
   }
 
-  toggleDone() {
-    this.done = !this.done;
+  addComplete(memo: string | undefined) {
+    if (this.done === false) {
+      const newRecord = new CompletedRecord({
+        id: this.completed.length,
+        completed: new Date(),
+        memo: memo || ' ',
+      });
+      this.completed.push(newRecord);
+    }
+    if (this.repeatInterval === 0) this.done = true;
+    this.dueDate = addDays(new Date(), this.repeatInterval);
   }
 }

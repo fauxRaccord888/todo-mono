@@ -1,5 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import ESSerializer from 'esserializer';
-import { Todo, Tag } from '../Class';
+import { CompletedRecord, Todo, Tag } from '../Class';
 
 const LOCAL_STORAGE_KEY = 'todo-mono-todos';
 const LOCAL_TAG_KEY = 'todo-mono-tags';
@@ -14,7 +15,7 @@ function typeAssertArray<T>(parsedItems: any, constructor: Function): T[] {
 export const getLocalTodoItems = () => {
   const items = window.localStorage.getItem(LOCAL_STORAGE_KEY);
   if (!items) return [];
-  const parsedItems = ESSerializer.deserialize(items, [Todo]);
+  const parsedItems = ESSerializer.deserialize(items, [Todo, CompletedRecord, Tag]);
   const res = typeAssertArray<Todo>(parsedItems, Todo);
   return res;
 };
