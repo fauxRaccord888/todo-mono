@@ -36,7 +36,7 @@ export class Todo {
       const newRecord = new CompletedRecord({
         id: this.completed.length,
         completed: new Date(),
-        memo: memo || ' ',
+        memo: memo || ' ',
       });
       this.completed.push(newRecord);
     }
