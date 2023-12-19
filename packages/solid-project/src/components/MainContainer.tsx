@@ -1,9 +1,9 @@
 import { For } from 'solid-js';
 import todoStore from '../stores/TodoStore';
 import SingleTodo from './SingleTodo';
-import TodoAddForm from './TodoAddForm';
-import TagAddForm from './TagAddForm'
 import StyledTitle from './styledComponents/StyledTitle';
+import TagAddForm from './TagAddForm';
+import TodoAddForm from './TodoAddForm';
 
 export default function MainContainer() {
   const { todos } = todoStore;
@@ -24,9 +24,7 @@ export default function MainContainer() {
         <StyledTitle>⛳ 할 일 목록</StyledTitle>
         <For each={todos}>
           {(todo) => (
-            <>
-              <SingleTodo todo={todo} />
-            </>
+            <SingleTodo todo={todo} />
           )}
         </For>
       </div>

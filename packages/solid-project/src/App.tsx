@@ -2,7 +2,7 @@ import { onMount } from 'solid-js';
 import './App.css';
 import MainContainer from './components/MainContainer';
 import todoStore from './stores/TodoStore';
-import tagStore from './stores/TagStore'
+import tagStore from './stores/TagStore';
 
 function App() {
   const { loadLocal: loadLocalTodo } = todoStore;
@@ -10,7 +10,7 @@ function App() {
 
   onMount(() => {
     loadLocalTodo();
-    loadLocalTag()
+    loadLocalTag();
   });
 
   return (

@@ -1,14 +1,16 @@
 import { For, Show, createSignal } from 'solid-js';
 import { dueDateFormatter, yyyymmdd } from '@todo-mono/shared';
-import StyledButton from './styledComponents/StyledButton';
-import RoundedContainer from './styledComponents/RoundedContainer';
+import { DeserializedTodo } from '../types/todoType';
 import todoStore from '../stores/TodoStore';
+import RoundedContainer from './styledComponents/RoundedContainer';
+import StyledButton from './styledComponents/StyledButton';
 
 export default function SingleTodo(props: { todo: DeserializedTodo }) {
   const { addComplete } = todoStore;
   const [isCompletedOpen, setIsCompletedOpen] = createSignal(false);
   const onComplete = (todo: DeserializedTodo) => {
-    const memo = window.prompt('완료를 축하합니다. 메모를 남겨주세요')
+    // eslint-disable-next-line no-alert
+    const memo = window.prompt('완료를 축하합니다. 메모를 남겨주세요');
     addComplete(todo, memo || ' ');
   };
 
@@ -72,7 +74,6 @@ export default function SingleTodo(props: { todo: DeserializedTodo }) {
                 </RoundedContainer>
               </span>
             )}
-
           </For>
         </div>
       </Show>

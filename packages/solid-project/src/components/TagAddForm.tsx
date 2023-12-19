@@ -3,7 +3,7 @@ import tagStore from '../stores/TagStore';
 import StyledButton from './styledComponents/StyledButton';
 
 export default function TagAddForm() {
-  const { addTag } = tagStore
+  const { addTag } = tagStore;
   const INITIAL_VALUE = {
     name: '',
     color: '#17A589',
@@ -17,21 +17,22 @@ export default function TagAddForm() {
     { label: '하늘', value: '#AED6F1' },
     { label: '오렌지', value: '#E59866' },
   ];
-  const [newTag, setNewTag] = createSignal({
-    ...INITIAL_VALUE
-  })
 
-  const handleNameInput = (e: Event & { target: HTMLTextAreaElement}) => {
-    setNewTag({...newTag(), name: e.target.value})
-  }
-  
-  const handleColorSelect = (e: Event & { target: HTMLSelectElement}) => {
-    setNewTag({...newTag(), color: e.target.value})
-  }
+  const [newTag, setNewTag] = createSignal({
+    ...INITIAL_VALUE,
+  });
+
+  const handleNameInput = (e: Event & { target: HTMLTextAreaElement }) => {
+    setNewTag({ ...newTag(), name: e.target.value });
+  };
+
+  const handleColorSelect = (e: Event & { target: HTMLSelectElement }) => {
+    setNewTag({ ...newTag(), color: e.target.value });
+  };
 
   const handleAddTag = () => {
-    addTag(newTag())
-    setNewTag({...INITIAL_VALUE})
+    addTag(newTag());
+    setNewTag({ ...INITIAL_VALUE });
   };
 
   return (
@@ -41,7 +42,7 @@ export default function TagAddForm() {
         <textarea
           onInput={handleNameInput}
           class="w-80 h-10 p-2"
-          />
+        />
       </div>
 
       <div class="flex">
@@ -50,17 +51,17 @@ export default function TagAddForm() {
           <select
             onChange={handleColorSelect}
           >
-            <For each={COLORS}>{
-              (color) => (
+            <For each={COLORS}>
+              {(color) => (
                 <option
                   label={color.label}
                   value={color.value}
-                  style={{'background-color': color.value}}
+                  style={{ 'background-color': color.value }}
                 >
                   {color.label}
                 </option>
-              )
-            }</For>
+              )}
+            </For>
           </select>
         </div>
 
