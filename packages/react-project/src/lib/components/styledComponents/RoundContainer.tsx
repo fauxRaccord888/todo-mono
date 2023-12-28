@@ -1,14 +1,15 @@
-import { PropsWithOptionalClassStyle } from "../../types/Prop";
+import { PropsWithOptionalClassStyle } from '../../types/Prop';
 
 function RoundContainer(props: PropsWithOptionalClassStyle) {
+  const { className, children, ...restProps } = props;
   return (
     <span
-      {...props}
-      className={`${props.className ?? ''} p-2 rounded-xl`}
+      {...restProps}
+      className={`${className ?? ''} p-2 rounded-xl`}
     >
-      {props.children}
+      {children}
     </span>
   );
 }
 
-export default RoundContainer
+export default RoundContainer;

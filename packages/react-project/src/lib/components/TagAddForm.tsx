@@ -1,24 +1,25 @@
-import { ChangeEventHandler, Dispatch, FormEventHandler, useState } from 'react';
+import { useState } from 'react';
 import { Tag } from '@todo-mono/shared';
-import { COLORS, INITIAL_VALUE } from './../constants/tag';
+import { COLORS, INITIAL_VALUE } from '../constants/tag';
 import { TagAction } from '../types/Reducer';
 
 import StyledButton from './styledComponents/StyledButton';
 
-function TagAddForm(props: { dispatch: Dispatch<TagAction> }) {
-  const [newTag, setNewTag] = useState({...INITIAL_VALUE});
+function TagAddForm(props: { dispatch: React.Dispatch<TagAction> }) {
+  const [newTag, setNewTag] = useState({ ...INITIAL_VALUE });
+  const { dispatch } = props;
 
-  const handleNameInput: FormEventHandler<HTMLTextAreaElement> = (e) => {
+  const handleNameInput: React.FormEventHandler<HTMLTextAreaElement> = (e) => {
     setNewTag({ ...newTag, name: e.currentTarget.value });
   };
 
-  const handleColorSelect: ChangeEventHandler<HTMLSelectElement> = (e) => {
+  const handleColorSelect: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
     setNewTag({ ...newTag, color: e.currentTarget.value });
   };
 
   const handleAddTag = () => {
-    const tag = new Tag(newTag)
-    props.dispatch({type: 'addItem', payload: {item: tag}});
+    const tag = new Tag(newTag);
+    dispatch({ type: 'addItem', payload: { item: tag } });
     setNewTag({ ...INITIAL_VALUE });
   };
 
@@ -38,15 +39,15 @@ function TagAddForm(props: { dispatch: Dispatch<TagAction> }) {
           <select
             onChange={handleColorSelect}
           >
-            {COLORS.map((color) => 
-                <option
-                  label={color.label}
-                  value={color.value}
-                  style={{ backgroundColor: color.value }}
-                >
-                  {color.label}
-                </option>
-            )}
+            {COLORS.map((color) => (
+              <option
+                label={color.label}
+                value={color.value}
+                style={{ backgroundColor: color.value }}
+              >
+                {color.label}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -63,4 +64,4 @@ function TagAddForm(props: { dispatch: Dispatch<TagAction> }) {
   );
 }
 
-export default TagAddForm
+export default TagAddForm;

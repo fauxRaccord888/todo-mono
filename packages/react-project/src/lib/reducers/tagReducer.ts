@@ -1,20 +1,21 @@
-import { Tag, getLocalTagItems, setLocalTagItems, } from "@todo-mono/shared";
-import { TagAction } from "../types/Reducer";
+import { type Tag, getLocalTagItems, setLocalTagItems } from '@todo-mono/shared';
+import type { TagAction } from '../types/Reducer';
 
 export function tagReducer(state: Tag[], action: TagAction) {
-    switch (action.type) {
-      case 'loadLocal': {
-        const items = getLocalTagItems()
-        return [...items];
-      }
-      case 'addItem': {
-        const { item } = action.payload
-
-        const items = [...state, item]
-        setLocalTagItems(items)
-        return items
-      }
+  switch (action.type) {
+    case 'loadLocal': {
+      const items = getLocalTagItems();
+      return [...items];
     }
-    // throw Error('Unknown action: ' + action.type);
+    case 'addItem': {
+      const { item } = action.payload;
+
+      const items = [...state, item];
+      setLocalTagItems(items);
+      return items;
+    }
+    default: throw Error('Unknown action');
+  }
 }
-  
+
+export default tagReducer;

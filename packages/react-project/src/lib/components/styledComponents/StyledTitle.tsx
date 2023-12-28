@@ -1,15 +1,15 @@
-import { PropsWithOptionalClassStyle } from "../../types/Prop"
+import { PropsWithOptionalClassStyle } from '../../types/Prop';
 
-function StyledTitle (props: PropsWithOptionalClassStyle) {
-
-    return (
-        <h2
-            {...props}
-            className={`${props.className ?? ''} flex flex-col text-4xl text-center`}
-        >
-            {props.children}
-        </h2>
-    )
+function StyledTitle(props: PropsWithOptionalClassStyle) {
+  const { className, children, ...restProps } = props;
+  return (
+    <h2
+      {...restProps}
+      className={`${className ?? ''} flex flex-col text-4xl text-center`}
+    >
+      {children}
+    </h2>
+  );
 }
 
-export default StyledTitle
+export default StyledTitle;
