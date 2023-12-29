@@ -94,8 +94,9 @@ function TodoAddForm(props: TodoAddProps) {
         <div className="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>태그 추가</span>
           <select onInput={handleSelectTag}>
-            {tags.map((tag) => (
+            {tags.map((tag, idx) => (
               <option
+                key={`${tag.name} ${String(idx)}`}
                 style={{ backgroundColor: tag.color }}
                 value={tag.name}
                 label={tag.name}

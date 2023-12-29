@@ -48,7 +48,11 @@ function MainContainer(props: MainContainerProps) {
         <StyledTitle>⛳ 할 일 목록</StyledTitle>
         {todos.map((todo, idx) => (
           // DEBUG idx in key
-          <SingleTodo key={`${todo.title} ${String(idx)}`} todo={todo} dispatch={todoDispatch} />
+          <SingleTodo
+            key={`${todo.title} ${String(idx)}`}
+            todo={todo}
+            dispatch={todoDispatch}
+          />
         ))}
       </div>
 

@@ -9,7 +9,7 @@ function SingleTodo(props: { todo: Todo, dispatch: React.Dispatch<TodoAction> })
   const [isCompletedOpen, setIsCompletedOpen] = useState(false);
   const { todo, dispatch } = props;
 
-  const onComplete = () => {
+  const handleClickComplete = () => {
     // eslint-disable-next-line no-alert
     const memo = window.prompt('완료를 축하합니다. 메모를 남겨주세요') || '완료';
     dispatch({ type: 'addCompleted', payload: { todo, memo } });
@@ -27,7 +27,7 @@ function SingleTodo(props: { todo: Todo, dispatch: React.Dispatch<TodoAction> })
         <span>
           { todo.title }
         </span>
-        <StyledButton onClick={onComplete}>
+        <StyledButton onClick={handleClickComplete}>
           완료처리
         </StyledButton>
       </div>

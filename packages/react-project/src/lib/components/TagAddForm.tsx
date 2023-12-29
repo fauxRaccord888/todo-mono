@@ -41,6 +41,7 @@ function TagAddForm(props: { dispatch: React.Dispatch<TagAction> }) {
           >
             {COLORS.map((color) => (
               <option
+                key={color.label}
                 label={color.label}
                 value={color.value}
                 style={{ backgroundColor: color.value }}
