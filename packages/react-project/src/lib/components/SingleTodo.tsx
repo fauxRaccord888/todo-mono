@@ -59,7 +59,7 @@ function SingleTodo(props: { todo: Todo, dispatch: React.Dispatch<TodoAction> })
         { isCompletedOpen ? '완료 내역 닫기' : '완료 내역 보기' }
       </StyledButton>
 
-      {isCompletedOpen ? (
+      {isCompletedOpen && (
         <div className="flex flex-col bg-gray-200 rounded-lg">
           {todo.completed.map((record, idx) => (
             <span key={`${record.memo} ${String(idx)}`} className="flex justify-between items-center p-2">

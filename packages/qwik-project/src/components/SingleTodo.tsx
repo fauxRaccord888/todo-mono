@@ -69,7 +69,7 @@ export default component$((props: { todo: DeserializedTodo }) => {
         { isCompletedOpen.value ? '완료 내역 닫기' : '완료 내역 보기' }
       </StyledButton>
 
-      {isCompletedOpen.value || (
+      {isCompletedOpen.value && (
         <div
           class="flex flex-col bg-gray-200 rounded-lg"
         >
