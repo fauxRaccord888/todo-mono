@@ -28,6 +28,7 @@ function TagAddForm(props: { dispatch: React.Dispatch<TagAction> }) {
       <div className="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
         <span>태그 제목</span>
         <textarea
+          value={newTag.name}
           onInput={handleNameInput}
           className="w-80 h-10 p-2"
         />
@@ -37,6 +38,7 @@ function TagAddForm(props: { dispatch: React.Dispatch<TagAction> }) {
         <div className="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>태그 색상</span>
           <select
+            value={newTag.color}
             onChange={handleColorSelect}
           >
             {COLORS.map((color) => (
