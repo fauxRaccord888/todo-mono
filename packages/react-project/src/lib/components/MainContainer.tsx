@@ -4,8 +4,8 @@ import { TagAction, TodoAction } from '../types/Reducer';
 import SingleTodo from './SingleTodo';
 import StyledTitle from './styledComponents/StyledTitle';
 
-import viteIcon from '../../assets/vite.svg';
-import reactIcon from '../../assets/react.svg';
+import ReactIcon from './icons/reactIcon';
+import ViteIcon from './icons/ViteIcon';
 import TagAddForm from './TagAddForm';
 import TodoAddForm from './TodoAddForm';
 
@@ -26,10 +26,10 @@ function MainContainer(props: MainContainerProps) {
         <StyledTitle>
           <div className="flex items-center justify-center">
             React
-            <img src={reactIcon} alt="react-icon" className="w-16 h-16" />
+            <ReactIcon className="w-16 h-16" />
             +
             Vite
-            <img src={viteIcon} alt="vite-icon" className="w-16 h-16" />
+            <ViteIcon className="w-16 h-16" />
           </div>
         </StyledTitle>
       </div>
