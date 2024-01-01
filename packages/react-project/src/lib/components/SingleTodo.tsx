@@ -70,7 +70,7 @@ function SingleTodo(props: { todo: Todo, dispatch: React.Dispatch<TodoAction> })
             </span>
           ))}
         </div>
-      ) : (null)}
+      )}
     </div>
   );
 }
