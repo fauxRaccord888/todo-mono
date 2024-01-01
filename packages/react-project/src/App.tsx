@@ -1,15 +1,10 @@
-import { useEffect, useReducer } from 'react';
-import { todoReducer } from './lib/reducers/todoReducer';
 import MainContainer from './lib/components/MainContainer';
-import { tagReducer } from './lib/reducers/tagReducer';
+import useTodoStore from './lib/hooks/useTodoStore';
+import useTagStore from './lib/hooks/useTagStore';
 
 function App() {
-  const [todoState, todoDispatch] = useReducer(todoReducer, []);
-  const [tagState, tagDispatch] = useReducer(tagReducer, []);
-  useEffect(() => {
-    todoDispatch({ type: 'loadLocal' });
-    tagDispatch({ type: 'loadLocal' });
-  }, []);
+  const [todoState, todoDispatch] = useTodoStore();
+  const [tagState, tagDispatch] = useTagStore();
 
   return (
     <div className="flex justify-center">
