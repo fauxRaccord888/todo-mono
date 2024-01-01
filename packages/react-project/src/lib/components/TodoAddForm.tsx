@@ -40,6 +40,13 @@ function TodoAddForm(props: TodoAddProps) {
     setNewTodo({ ...newTodo, tags: [...newTodo.tags, tag] });
   };
 
+  const handleNumericInput: React.FormEventHandler<HTMLInputElement> = (e) => {
+    setNewTodo({
+      ...newTodo,
+      [e.currentTarget.name]: Number(e.currentTarget.value),
+    });
+  };
+
   return (
     <div className="flex flex-col rounded-3xl bg-slate-400 py-8">
       <div className="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
@@ -60,7 +67,8 @@ function TodoAddForm(props: TodoAddProps) {
             min={1}
             max={5}
             value={newTodo.importance}
-            onInput={(e) => setNewTodo({ ...newTodo, importance: Number(e.currentTarget.value) })}
+            name="importance"
+            onInput={handleNumericInput}
           />
 
         </div>
@@ -72,9 +80,8 @@ function TodoAddForm(props: TodoAddProps) {
             min={0}
             max={31}
             value={newTodo.repeatInterval}
-            onInput={(e) => {
-              setNewTodo({ ...newTodo, repeatInterval: Number(e.currentTarget.value) });
-            }}
+            name="repeatInterval"
+            onInput={handleNumericInput}
           />
         </div>
         <div className="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
@@ -85,7 +92,8 @@ function TodoAddForm(props: TodoAddProps) {
             min={0}
             max={31}
             value={newTodo.dueDatePlus}
-            onInput={(e) => setNewTodo({ ...newTodo, dueDatePlus: Number(e.currentTarget.value) })}
+            name="dueDatePlus"
+            onInput={handleNumericInput}
           />
         </div>
       </div>
