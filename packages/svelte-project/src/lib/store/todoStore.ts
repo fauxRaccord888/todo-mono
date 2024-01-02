@@ -1,35 +1,44 @@
-import { get, writable } from "svelte/store";
-import { Todo, getLocalTodoItems, setLocalTodoItems } from "@todo-mono/shared"
+import { get, writable } from 'svelte/store';
+import { Todo, localStorageStore, LOCAL_TODO_KEY } from '@todo-mono/shared';
 
 function createTodoStore() {
-    const store = writable<Todo[]>([])
-    const {subscribe, update} = store
+  const store = writable<Todo[]>([]);
+  const { subscribe, update } = store;
 
-    function loadLocal() {
-        const items = getLocalTodoItems()
-        update(() => [...items])
-    }
+  function loadLocal() {
+    const items = localStorageStore.getLocalTodoItems();
+    update(() => [...items]);
+  }
 
-    function saveLocal() {
-        const items = get(store)
-        setLocalTodoItems(items)
-    }
+  function saveLocal() {
+    const items = get(store);
+    localStorageStore.setLocalTodoItems(items);
+  }
 
-    function addTodo(todo: Todo) {
-        update((items) => [...items, todo])
-        saveLocal()
-    }
+  function addTodo(todo: Todo) {
+    update((items) => [...items, todo]);
+    saveLocal();
+  }
 
-    function addCompleted(todo: Todo, memo: string) {
-        todo.addComplete(memo)
-        update((items) => [...items])
-        saveLocal()
-    }
+  function addCompleted(todo: Todo, memo: string) {
+    todo.addComplete(memo);
+    update((items) => [...items]);
+    saveLocal();
+  }
 
-    return {
-        subscribe, loadLocal, saveLocal, addTodo, addCompleted
-    }
+  function subscribeLocal() {
+    loadLocal();
+    window.addEventListener(LOCAL_TODO_KEY, loadLocal);
+  }
+
+  function unsubscribeLocal() {
+    window.removeEventListener(LOCAL_TODO_KEY, loadLocal);
+  }
+
+  return {
+    subscribe, subscribeLocal, unsubscribeLocal, addTodo, addCompleted,
+  };
 }
 
-export const todoStore = createTodoStore()
-export default todoStore
+export const todoStore = createTodoStore();
+export default todoStore;

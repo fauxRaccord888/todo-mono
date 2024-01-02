@@ -1,29 +1,38 @@
-import { get, writable } from "svelte/store";
-import { Tag, getLocalTagItems, setLocalTagItems } from "@todo-mono/shared"
+import { get, writable } from 'svelte/store';
+import { Tag, localStorageStore, LOCAL_TAG_KEY } from '@todo-mono/shared';
 
 function createTagStore() {
-    const store = writable<Tag[]>([])
-    const {subscribe, update} = store
+  const store = writable<Tag[]>([]);
+  const { subscribe, update } = store;
 
-    function loadLocal() {
-        const items = getLocalTagItems()
-        update(() => [...items])
-    }
+  function loadLocal() {
+    const items = localStorageStore.getLocalTagItems();
+    update(() => [...items]);
+  }
 
-    function saveLocal() {
-        const items = get(store)
-        setLocalTagItems(items)
-    }
+  function saveLocal() {
+    const items = get(store);
+    localStorageStore.setLocalTagItems(items);
+  }
 
-    function addTag(tag: Tag) {
-        update((items) => [...items, tag])
-        saveLocal()
-    }
+  function addTag(tag: Tag) {
+    update((items) => [...items, tag]);
+    saveLocal();
+  }
 
-    return {
-        subscribe, loadLocal, saveLocal, addTag
-    }
+  function subscribeLocal() {
+    loadLocal();
+    window.addEventListener(LOCAL_TAG_KEY, loadLocal);
+  }
+
+  function unsubscribeLocal() {
+    window.removeEventListener(LOCAL_TAG_KEY, loadLocal);
+  }
+
+  return {
+    subscribe, subscribeLocal, unsubscribeLocal, addTag,
+  };
 }
 
-export const tagStore = createTagStore()
-export default tagStore
+export const tagStore = createTagStore();
+export default tagStore;

@@ -1,10 +1,24 @@
 <script lang="ts">
+    import { onMount, onDestroy } from "svelte";
     import type { Todo } from "@todo-mono/shared";
+
+    import tagStore from "../store/tagStore"
     import todoStore from "../store/todoStore";
     import SingleTodo from "./SingleTodo.svelte";
     import TagAddForm from "./TagAddForm.svelte";
-    import StyledTitle from "./styledComponents/StyledTitle.svelte";
     import TodoAddForm from "./TodoAddForm.svelte";
+    import StyledTitle from "./styledComponents/StyledTitle.svelte";
+    
+    onMount(() => {
+        todoStore.subscribeLocal()
+        tagStore.subscribeLocal()
+    })
+
+    onDestroy(() => {
+        todoStore.unsubscribeLocal()
+        tagStore.unsubscribeLocal()
+    })
+
 
     let todos: Todo[]
     todoStore.subscribe((items: Todo[]) => {
