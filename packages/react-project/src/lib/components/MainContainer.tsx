@@ -1,27 +1,20 @@
-import { Tag, Todo } from '@todo-mono/shared';
-import { TagAction, TodoAction } from '../types/Reducer';
+import useTodoStore from '../hooks/useTodoStore';
+import useTagStore from '../hooks/useTagStore';
 
 import SingleTodo from './SingleTodo';
 import StyledTitle from './styledComponents/StyledTitle';
 
-import ReactIcon from './icons/reactIcon';
+import ReactIcon from './icons/ReactIcon';
 import ViteIcon from './icons/ViteIcon';
 import TagAddForm from './TagAddForm';
 import TodoAddForm from './TodoAddForm';
 
-interface MainContainerProps {
-  todos: Todo[]
-  todoDispatch: React.Dispatch<TodoAction>
-  tags: Tag[]
-  tagDispatch: React.Dispatch<TagAction>
-}
+function MainContainer() {
+  const [todos, todoDispatch] = useTodoStore();
+  const [tags, tagDispatch] = useTagStore();
 
-function MainContainer(props: MainContainerProps) {
-  const {
-    todos, tags, todoDispatch, tagDispatch,
-  } = props;
   return (
-    <div className="flex flex-col w-full place-items-center space-y-12 py-12 wanted-sans">
+    <div className="flex flex-col place-items-center space-y-12 wanted-sans">
       <div className="space-y-4 w-full">
         <StyledTitle>
           <div className="flex items-center justify-center">
