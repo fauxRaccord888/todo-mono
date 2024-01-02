@@ -1,11 +1,11 @@
 {
-  "name": "svelte-project",
+  "name": "@todo-mono/svelte-project",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "package": "svelte-package",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
@@ -21,7 +21,17 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.8"
   },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+			"svelte": "./dist/index.js"
+		}
+	},
   "dependencies": {
+    "@sveltejs/package": "^2.2.5",
     "@todo-mono/shared": "workspace:^"
-  }
+  },
+  "peerDependencies": {
+		"svelte": "^4.0.0"
+	}
 }
