@@ -4,6 +4,10 @@
 
     import tagStore from "../store/tagStore"
     import todoStore from "../store/todoStore";
+
+	import ViteIcon from "./icons/ViteIcon.svelte";
+	import SvelteIcon from "./icons/SvelteIcon.svelte";
+
     import SingleTodo from "./SingleTodo.svelte";
     import TagAddForm from "./TagAddForm.svelte";
     import TodoAddForm from "./TodoAddForm.svelte";
@@ -27,6 +31,17 @@
 </script>
 
 <div class="wanted-sans space-y-12">
+
+    <StyledTitle>
+        <div class="flex items-center justify-center">
+          Svelte
+          <SvelteIcon className="w-16 h-16" />
+          +
+          Vite
+          <ViteIcon className="w-16 h-16" />
+        </div>
+      </StyledTitle>
+
     <div>
         <StyledTitle>📝 할 일 추가하기</StyledTitle>
         <TodoAddForm />
