@@ -16,13 +16,11 @@
     onMount(() => {
         todoStore.subscribeLocal()
         tagStore.subscribeLocal()
+        return (() =>{
+            todoStore.unsubscribeLocal()
+            tagStore.unsubscribeLocal()
+        })
     })
-
-    onDestroy(() => {
-        todoStore.unsubscribeLocal()
-        tagStore.unsubscribeLocal()
-    })
-
 
     let todos: Todo[]
     todoStore.subscribe((items: Todo[]) => {
@@ -30,29 +28,30 @@
     })
 </script>
 
-<div class="wanted-sans space-y-12">
+<div class="flex flex-col place-items-center space-y-12 wanted-sans">
+    <div class="space-y-4 w-full">
+        <StyledTitle>
+            <div class="flex items-center justify-center">
+              Svelte
+              <SvelteIcon class="w-16 h-16" />
+              +
+              Vite
+              <ViteIcon class="w-16 h-16" />
+            </div>
+          </StyledTitle>
+    </div>
 
-    <StyledTitle>
-        <div class="flex items-center justify-center">
-          Svelte
-          <SvelteIcon className="w-16 h-16" />
-          +
-          Vite
-          <ViteIcon className="w-16 h-16" />
-        </div>
-      </StyledTitle>
-
-    <div>
+    <div class="space-y-4 w-full">
         <StyledTitle>📝 할 일 추가하기</StyledTitle>
         <TodoAddForm />
     </div>
 
-    <div>
+    <div class="space-y-4 w-full">
         <StyledTitle>#️⃣ 태그 추가하기</StyledTitle>
         <TagAddForm />
     </div>
 
-    <div class="space-y-4">
+    <div class="space-y-4 w-full">
         <StyledTitle>⛳ 할 일 목록</StyledTitle>
             {#each todos as todo}
                 <SingleTodo todo={todo}/>

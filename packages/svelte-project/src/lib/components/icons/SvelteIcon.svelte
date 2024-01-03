@@ -5,8 +5,6 @@
   aria-hidden="true"
   role="img"
   class="{$$restProps.class} iconify iconify--logos"
-  width="26.6"
-  height="32"
   preserveAspectRatio="xMidYMid meet"
   viewBox="0 0 256 308"
 >
