@@ -38,7 +38,7 @@ const addTag = (e: Event) => {
   const { target } = e;
   if (!(target instanceof HTMLSelectElement)) return;
 
-  const targetTag = tagStore.tags.find((t) => t.name === target.value);
+  const targetTag = tagStore.tags.value.find((t) => t.name === target.value);
   if (!targetTag) return;
 
   const tagAlreadyExists = newTodoProps.value.tags.some((tag) => tag.name === targetTag.name);
@@ -96,7 +96,7 @@ const addTag = (e: Event) => {
           @input="addTag"
         >
           <option
-            v-for="tag in tagStore.tags"
+            v-for="tag in tagStore.tags.value"
             :key="tag.name"
             :value="tag.name"
             :label="tag.name"

@@ -1,67 +1,87 @@
-import { reactive } from 'vue';
+import { ref } from 'vue';
 import {
-  Tag, Todo, getLocalTagItems, getLocalTodoItems, setLocalTagItems, setLocalTodoItems,
+  LOCAL_TAG_KEY, LOCAL_TODO_KEY, Tag, Todo, localStorageStore,
 } from '@todo-mono/shared';
 
-interface StoreProps {
-  loadLocal: Function,
-  saveLocal: Function
-  add: Function,
-  delete: Function
-}
+export function createTodoStore() {
+  const todos = ref<Todo[]>([]);
+  function loadLocal() {
+    todos.value = localStorageStore.getLocalTodoItems();
+  }
 
-interface TodoStoreProps extends StoreProps {
-  todos: Todo[],
-  addComplete: Function
-}
+  function saveLocal() {
+    localStorageStore.setLocalTodoItems(todos.value);
+  }
 
-interface TagStoreProps extends StoreProps {
-  tags: Tag[]
-}
+  function subscribe() {
+    loadLocal();
+    window.addEventListener(LOCAL_TODO_KEY, loadLocal);
+  }
 
-export const todoStore = reactive<TodoStoreProps>({
-  todos: [],
-  loadLocal() {
-    this.todos = getLocalTodoItems();
-  },
-  saveLocal() {
-    setLocalTodoItems(this.todos);
-  },
-  add(todo: Todo) {
-    if (this.todos.some((t) => t.title === todo.title)) return false;
-    this.todos.push(todo);
-    this.saveLocal();
+  function unsubscribe() {
+    window.removeEventListener(LOCAL_TODO_KEY, loadLocal);
+  }
+
+  function addItem(todo: Todo) {
+    if (todos.value.some((t) => t.title === todo.title)) return false;
+    todos.value.push(todo);
+    saveLocal();
     return true;
-  },
-  delete(todo: Todo) {
-    this.todos.filter((e) => e !== todo);
-    this.saveLocal();
-  },
-  addComplete(todo: Todo, memo: string) {
-    const target = this.todos.filter((e) => e === todo)[0];
+  }
+
+  function deleteItem(todo: Todo) {
+    todos.value = todos.value.filter((e) => e !== todo);
+    saveLocal();
+  }
+
+  function addComplete(todo: Todo, memo: string) {
+    const target = todos.value.filter((e) => e === todo)[0];
     target.addComplete(memo);
-    this.saveLocal();
-  },
-});
+    saveLocal();
+  }
 
-export const tagStore = reactive<TagStoreProps>({
-  tags: [],
-  loadLocal() {
-    this.tags = getLocalTagItems();
-  },
-  saveLocal() {
-    setLocalTagItems(this.tags);
-  },
-  add(tag: Tag) {
-    if (this.tags.some((t) => t.name === tag.name)) return false;
-    this.tags.push(tag);
-    this.saveLocal();
+  return {
+    todos, subscribe, unsubscribe, add: addItem, delete: deleteItem, addComplete,
+  };
+}
+
+export function createTagStore() {
+  const tags = ref<Tag[]>([]);
+  function loadLocal() {
+    tags.value = localStorageStore.getLocalTagItems();
+  }
+
+  function saveLocal() {
+    localStorageStore.setLocalTagItems(tags.value);
+  }
+
+  function subscribe() {
+    loadLocal();
+    window.addEventListener(LOCAL_TAG_KEY, loadLocal);
+  }
+
+  function unsubscribe() {
+    window.removeEventListener(LOCAL_TAG_KEY, loadLocal);
+  }
+
+  function addItem(tag: Tag) {
+    if (tags.value.some((t) => t.name === tag.name)) return false;
+    tags.value.push(tag);
+    saveLocal();
     return true;
-  },
-  delete(tag: Tag) {
-    this.tags.filter((e) => e !== tag);
-    this.saveLocal();
-  },
-});
+  }
 
-export default { todoStore };
+  function deleteItem(tag: Tag) {
+    tags.value = tags.value.filter((e) => e !== tag);
+    saveLocal();
+  }
+
+  return {
+    tags, subscribe, unsubscribe, add: addItem, delete: deleteItem,
+  };
+}
+
+export const todoStore = createTodoStore();
+export const tagStore = createTagStore();
+
+export default { todoStore, tagStore };

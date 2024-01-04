@@ -1,10 +1,21 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted } from 'vue';
+import { todoStore, tagStore } from '../../utils/store';
+
 import SingleTodo from './SingeTodo.vue';
 import TodoAddForm from './TodoAddForm.vue';
 import TagAddForm from './TagAddForm.vue';
 
-import { todoStore } from '../../utils/store';
 import StyledTitle from '../common/StyledTitle.vue';
+
+onMounted(() => {
+  todoStore.subscribe();
+  tagStore.subscribe();
+});
+onUnmounted(() => {
+  todoStore.unsubscribe();
+  tagStore.unsubscribe();
+});
 </script>
 
 <template>
@@ -21,7 +32,7 @@ import StyledTitle from '../common/StyledTitle.vue';
     <div class="main-item space-y-4">
       <StyledTitle>⛳ 할 일 목록</StyledTitle>
       <SingleTodo
-        v-for="todo in todoStore.todos"
+        v-for="todo in todoStore.todos.value"
         :key="todo.title"
         :todo="todo"
       />
