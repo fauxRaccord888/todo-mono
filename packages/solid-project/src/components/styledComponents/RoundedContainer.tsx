@@ -1,6 +1,6 @@
 import { ComponentProps } from 'solid-js';
 
-export default function StyledButton(props: ComponentProps<'span'>) {
+export default function RoundedContainer(props: ComponentProps<'span'>) {
   return (
     <span
       {...props}

@@ -3,7 +3,11 @@ import MainContainer from './components/MainContainer';
 
 function App() {
   return (
-    <MainContainer />
+    <div class="flex justify-center">
+      <div class="w-[48rem]">
+        <MainContainer />
+      </div>
+    </div>
   );
 }
 

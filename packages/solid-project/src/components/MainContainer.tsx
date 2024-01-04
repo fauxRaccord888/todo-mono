@@ -7,6 +7,8 @@ import SingleTodo from './SingleTodo';
 import StyledTitle from './styledComponents/StyledTitle';
 import TagAddForm from './TagAddForm';
 import TodoAddForm from './TodoAddForm';
+import ViteIcon from './Icons/ViteIcon';
+import SolidIcon from './Icons/SolidIcon';
 
 export default function MainContainer() {
   onMount(() => {
@@ -19,18 +21,30 @@ export default function MainContainer() {
   });
 
   return (
-    <div class="flex flex-col w-full place-items-center space-y-12 py-12 wanted-sans">
-      <div class="w-[48rem] space-y-4">
+    <div class="flex flex-col place-items-center space-y-12 wanted-sans">
+      <div class="space-y-4 w-full">
+        <StyledTitle>
+          <div class="flex items-center justify-center">
+            Solid
+            <SolidIcon class="w-16 h-16" />
+            +
+            Vite
+            <ViteIcon class="w-16 h-16" />
+          </div>
+        </StyledTitle>
+      </div>
+
+      <div class="space-y-4 w-full">
         <StyledTitle>📝 할 일 추가하기</StyledTitle>
         <TodoAddForm />
       </div>
 
-      <div class="w-[48rem] space-y-4">
+      <div class="space-y-4 w-full">
         <StyledTitle>#️⃣ 태그 추가하기</StyledTitle>
         <TagAddForm />
       </div>
 
-      <div class="w-[48rem] space-y-4">
+      <div class="space-y-4 w-full">
         <StyledTitle>⛳ 할 일 목록</StyledTitle>
         <For each={todoStore.todos}>
           {(todo) => (
