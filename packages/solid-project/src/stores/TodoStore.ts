@@ -40,6 +40,8 @@ function createTodos() {
 
   const addComplete = (todo:DeserializedTodo, memo: string) => {
     const idx = todos.indexOf(todo);
+    // Solid의 produce local mutation을 허용하는 api임
+    // "Immer에서 영감을 받은 API로, Solid 스토어 객체에 대한 로컬라이즈된 변경을 허용합니다."
     setTodos(idx, produce(
       (d) => {
         d.completed.push({
@@ -47,7 +49,6 @@ function createTodos() {
           completed: new Date(),
           memo,
         });
-        // DEBUG side-effect 주의
         // eslint-disable-next-line no-param-reassign
         d.dueDate = addDays(new Date(), d.repeatInterval);
         return d;
