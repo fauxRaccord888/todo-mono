@@ -6,7 +6,14 @@ interface NumericInputProps {
 }
 
 const props = defineProps<NumericInputProps>();
-defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue']);
+
+// FIXME type assertion
+// 공식 문서에서도 event.target에 접근할 때, type assertion을 쓰고 있음
+// https://vuejs.org/guide/typescript/composition-api#typing-event-handlers
+const handleChange = (e: Event /* & { target : HTMLInputElement} */) => {
+  emit('update:modelValue', (e.target as HTMLInputElement).value);
+};
 </script>
 
 <template>
@@ -15,6 +22,6 @@ defineEmits(['update:modelValue']);
     :min="props.min"
     :max="props.max"
     :value="props.modelValue"
-    @change="$emit('update:modelValue', Number($event.target.value)) "
+    @change="handleChange"
   >
 </template>
