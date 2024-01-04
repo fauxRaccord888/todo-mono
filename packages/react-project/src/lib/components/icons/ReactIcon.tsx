@@ -1,6 +1,6 @@
 import { PropsWithOptionalClassStyle } from '../../types/Prop';
 
-export default function ReactIcon(props: PropsWithOptionalClassStyle) {
+function ReactIcon(props: PropsWithOptionalClassStyle) {
   const { className, style, ...restProps } = props;
 
   return (
@@ -20,3 +20,5 @@ export default function ReactIcon(props: PropsWithOptionalClassStyle) {
     </svg>
   );
 }
+
+export default ReactIcon;

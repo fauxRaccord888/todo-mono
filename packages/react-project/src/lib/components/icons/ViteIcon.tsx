@@ -1,6 +1,6 @@
 import { PropsWithOptionalClassStyle } from '../../types/Prop';
 
-export default function ViteIcon(props: PropsWithOptionalClassStyle) {
+function ViteIcon(props: PropsWithOptionalClassStyle) {
   const { className, style, ...restProps } = props;
   return (
     <svg
@@ -31,3 +31,5 @@ export default function ViteIcon(props: PropsWithOptionalClassStyle) {
     </svg>
   );
 }
+
+export default ViteIcon;
