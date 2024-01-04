@@ -11,7 +11,7 @@ const isCompletedOpen = ref(false);
 const onComplete = () => {
   // eslint-disable-next-line no-alert
   const memo = window.prompt('완료를 축하해요. 메모를 남겨주세요');
-  todoStore.addComplete(props.todo, memo);
+  todoStore.addComplete(props.todo, memo || '완료');
 };
 const onToggleCompleted = () => { isCompletedOpen.value = !isCompletedOpen.value; };
 </script>

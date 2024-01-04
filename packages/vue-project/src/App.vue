@@ -3,5 +3,9 @@ import MainContainer from './components/Todo/MainContainer.vue';
 </script>
 
 <template>
-  <MainContainer class="wanted-sans" />
+  <div class="flex justify-center">
+    <div class="w-[48rem]">
+      <MainContainer class="wanted-sans" />
+    </div>
+  </div>
 </template>
