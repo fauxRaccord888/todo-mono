@@ -12,10 +12,10 @@ export function serializeTag(deserialized: DeserializedTag[]): Tag[] {
 }
 
 export function deserializeTodo(serialized: Todo[]): DeserializedTodo[] {
-  const result = serialized.map((t) => ({
-    ...t,
-    completed: [...t.completed],
-    tags: [...t.tags],
+  const result = serialized.map((td) => ({
+    ...td,
+    completed: [...td.completed.map((c) => ({ ...c }))],
+    tags: [...td.tags.map((tg) => ({ ...tg }))],
   }));
   return result;
 }
