@@ -1,4 +1,4 @@
-import { For, onMount } from 'solid-js';
+import { Index, onMount } from 'solid-js';
 
 import todoStore from '../stores/TodoStore';
 import tagStore from '../stores/TagStore';
@@ -46,11 +46,11 @@ export default function MainContainer() {
 
       <div class="space-y-4 w-full">
         <StyledTitle>⛳ 할 일 목록</StyledTitle>
-        <For each={todoStore.todos}>
+        <Index each={todoStore.todos}>
           {(todo) => (
-            <SingleTodo todo={todo} />
+            <SingleTodo todo={todo()} />
           )}
-        </For>
+        </Index>
       </div>
 
     </div>

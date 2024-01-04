@@ -1,4 +1,4 @@
-import { For, createSignal } from 'solid-js';
+import { Index, createSignal } from 'solid-js';
 import { addDays } from 'date-fns';
 import { DeserializedCompleted, DeserializedTag } from '../types/todoType';
 import tagStore from '../stores/TagStore';
@@ -93,29 +93,29 @@ export default function AddTodoForm() {
         <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>태그 추가</span>
           <select onInput={handleSelectTag}>
-            <For each={tags}>
+            <Index each={tags}>
               {(tag) => (
                 <option
-                  style={{ 'background-color': tag.color }}
-                  value={tag.name}
-                  label={tag.name}
+                  style={{ 'background-color': tag().color }}
+                  value={tag().name}
+                  label={tag().name}
                 />
               )}
-            </For>
+            </Index>
           </select>
         </div>
         <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>현재 태그</span>
-          <For each={newTodo().tags}>
+          <Index each={newTodo().tags}>
             {(tag) => (
               <RoundedContainer
-                style={{ 'background-color': tag.color }}
+                style={{ 'background-color': tag().color }}
               >
                 {tag.name}
               </RoundedContainer>
             )}
 
-          </For>
+          </Index>
 
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { For, Show, createSignal } from 'solid-js';
+import { Index, Show, createSignal } from 'solid-js';
 import { dueDateFormatter, yyyymmdd } from '@todo-mono/shared';
 import { DeserializedTodo } from '../types/todoType';
 import todoStore from '../stores/TodoStore';
@@ -41,15 +41,15 @@ export default function SingleTodo(props: { todo: DeserializedTodo }) {
           { props.todo.repeatInterval }
           일
         </RoundedContainer>
-        <For each={props.todo.tags}>
+        <Index each={props.todo.tags}>
           {(tag) => (
             <RoundedContainer
-              style={{ background: tag.color }}
+              style={{ background: tag().color }}
             >
-              { tag.name }
+              { tag().name }
             </RoundedContainer>
           )}
-        </For>
+        </Index>
       </div>
 
       <StyledButton
@@ -63,18 +63,18 @@ export default function SingleTodo(props: { todo: DeserializedTodo }) {
         <div
           class="flex flex-col bg-gray-200 rounded-lg"
         >
-          <For each={props.todo.completed}>
+          <Index each={props.todo.completed}>
             {(record) => (
               <span
                 class="flex justify-between items-center p-2"
               >
-                { record.memo }
+                { record().memo }
                 <RoundedContainer class="bg-slate-400">
-                  { yyyymmdd(record.completed) }
+                  { yyyymmdd(record().completed) }
                 </RoundedContainer>
               </span>
             )}
-          </For>
+          </Index>
         </div>
       </Show>
     </div>
