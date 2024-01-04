@@ -1,12 +1,22 @@
-import { For } from 'solid-js';
+import { For, onMount } from 'solid-js';
+
 import todoStore from '../stores/TodoStore';
+import tagStore from '../stores/TagStore';
+
 import SingleTodo from './SingleTodo';
 import StyledTitle from './styledComponents/StyledTitle';
 import TagAddForm from './TagAddForm';
 import TodoAddForm from './TodoAddForm';
 
 export default function MainContainer() {
-  const { todos } = todoStore;
+  onMount(() => {
+    todoStore.subscribe();
+    tagStore.subscribe();
+    return (() => {
+      todoStore.unsubscribe();
+      tagStore.unsubscribe();
+    });
+  });
 
   return (
     <div class="flex flex-col w-full place-items-center space-y-12 py-12 wanted-sans">
@@ -22,7 +32,7 @@ export default function MainContainer() {
 
       <div class="w-[48rem] space-y-4">
         <StyledTitle>⛳ 할 일 목록</StyledTitle>
-        <For each={todos}>
+        <For each={todoStore.todos}>
           {(todo) => (
             <SingleTodo todo={todo} />
           )}

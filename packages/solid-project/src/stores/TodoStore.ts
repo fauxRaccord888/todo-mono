@@ -1,4 +1,4 @@
-import { setLocalTodoItems, getLocalTodoItems } from '@todo-mono/shared';
+import { LOCAL_TODO_KEY, localStorageStore } from '@todo-mono/shared';
 import { createRoot } from 'solid-js';
 import { createStore, produce } from 'solid-js/store';
 import { addDays } from 'date-fns';
@@ -7,15 +7,25 @@ import { DeserializedTodo } from '../types/todoType';
 
 function createTodos() {
   const [todos, setTodos] = createStore<DeserializedTodo[]>([]);
+
   const loadLocal = () => {
-    const localTodo = getLocalTodoItems();
+    const localTodo = localStorageStore.getLocalTodoItems();
     const deserializedTodo = deserializeTodo(localTodo);
     setTodos([...deserializedTodo]);
   };
 
   const saveLocal = () => {
     const serializedTodo = serializeTodo(todos);
-    setLocalTodoItems(serializedTodo);
+    localStorageStore.setLocalTodoItems(serializedTodo);
+  };
+
+  const subscribe = () => {
+    loadLocal();
+    window.addEventListener(LOCAL_TODO_KEY, loadLocal);
+  };
+
+  const unsubscribe = () => {
+    window.removeEventListener(LOCAL_TODO_KEY, loadLocal);
   };
 
   const addTodo = (todo:DeserializedTodo) => {
@@ -47,7 +57,7 @@ function createTodos() {
   };
 
   return {
-    todos, loadLocal, addTodo, deleteTodo, addComplete,
+    todos, subscribe, unsubscribe, addTodo, deleteTodo, addComplete,
   };
 }
 

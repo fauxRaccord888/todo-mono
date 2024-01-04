@@ -1,4 +1,4 @@
-import { setLocalTagItems, getLocalTagItems } from '@todo-mono/shared';
+import { localStorageStore, LOCAL_TAG_KEY } from '@todo-mono/shared';
 import { createRoot } from 'solid-js';
 import { createStore } from 'solid-js/store';
 import { deserializeTag, serializeTag } from '../utils/serializer';
@@ -6,15 +6,25 @@ import { DeserializedTag } from '../types/todoType';
 
 function createTags() {
   const [tags, setTags] = createStore<DeserializedTag[]>([]);
+
   const loadLocal = () => {
-    const localTag = getLocalTagItems();
+    const localTag = localStorageStore.getLocalTagItems();
     const deserializedTag = deserializeTag(localTag);
     setTags([...deserializedTag]);
   };
 
   const saveLocal = () => {
     const serializedTags = serializeTag(tags);
-    setLocalTagItems(serializedTags);
+    localStorageStore.setLocalTagItems(serializedTags);
+  };
+
+  const subscribe = () => {
+    loadLocal();
+    window.addEventListener(LOCAL_TAG_KEY, loadLocal);
+  };
+
+  const unsubscribe = () => {
+    window.removeEventListener(LOCAL_TAG_KEY, loadLocal);
   };
 
   const addTag = (tag: DeserializedTag) => {
@@ -28,7 +38,7 @@ function createTags() {
   };
 
   return {
-    tags, loadLocal, addTag, deleteTag,
+    tags, subscribe, unsubscribe, addTag, deleteTag,
   };
 }
 
