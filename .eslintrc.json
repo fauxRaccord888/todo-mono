@@ -40,6 +40,147 @@
           },
           "extraFileExtensions": [".vue"]
       }
+    },
+    {
+      "files" : ["./packages/solid-project/**/*"],
+      "plugins": ["solid"],
+      "extends": [
+        "airbnb",
+        "airbnb-typescript",
+        "plugin:solid/typescript"
+      ],
+      "parserOptions": {
+        "project" : "./packages/solid-project/tsconfig.json",
+        "sourceType": "module",
+        "ecmaVersion": 2018,
+        "ecmaFeatures": {
+            "globalReturn": false,
+            "jsx": true
+        }
+      },    
+      "rules" : {
+        "solid/reactivity": "warn",
+        "solid/no-destructure": "warn",
+        "solid/jsx-no-undef": "error",
+        "react/destructuring-assignment" : "off",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-no-constructed-context-values" : "off",
+        "react/button-has-type": "off",
+        "react/no-unknown-property": "off",
+        "react/no-this-in-sfc": "off",
+        "react/jsx-props-no-spreading": "off"
+      }
+    },
+    {
+      "files" : ["./packages/qwik-project/**/*"],
+      "parserOptions": {
+        "ecmaVersion": 2021,
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "sourceType": "module"
+      },
+      "plugins": ["@typescript-eslint"],
+      "extends": [    
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:qwik/recommended"
+      ],
+      "rules": {
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-namespace": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-this-alias": "off",
+        "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "prefer-spread": "off",
+        "no-case-declarations": "off",
+        "no-console": "off",
+        "react/no-unknown-property": "off",
+        "react/button-has-type": "off",
+        "@typescript-eslint/no-unused-vars": ["error"]
+      }
+    },
+    {
+      "files" : ["./packages/lit-project/**/*"],
+      "parserOptions": {
+        "ecmaVersion": 2021,
+        "ecmaFeatures": {
+          "jsx": true
+        },
+        "sourceType": "module"
+      },
+      "plugins": [
+        "@typescript-eslint",
+        "lit"
+      ],
+      "extends": [    
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:lit/recommended"
+      ],
+      "rules": {
+        "lit/no-legacy-template-syntax": "error",
+        "lit/no-template-arrow": "warn"    
+      }
+    },
+    {
+      "files" : ["./packages/svelte-project/**/*.{ts, svelte}"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "./packages/svelte-project/tsconfig.json",
+        "extraFileExtensions": [".svelte"] 
+      },
+      "plugins": [
+        "@typescript-eslint",
+        "svelte"
+      ],
+      "extends": ["plugin:svelte/recommended"],
+      "overrides": [
+        {
+          "files": ["*.svelte"],
+          "parser": "svelte-eslint-parser",
+          "parserOptions": {
+            "parser": "@typescript-eslint/parser"
+          }
+        }
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": "off"
+      }
+    },
+    {
+      "files": ["./packages/react-project/**/*"],
+      "env": { "browser": true, "es2022": true },
+      "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react-hooks/recommended"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": "./packages/react-project/tsconfig.json"
+      },
+      "plugins": ["react-refresh"],
+      "rules": {
+        "react-refresh/only-export-components": ["warn", { "allowConstantExport": true }],
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-props-no-spreading": "off"
+      }
+    },
+    {
+      "files": ["./packages/preact-project/**/*"],
+      "rules": {
+        "react/react-in-jsx-scope": "off",
+        "react/button-has-type": "off",
+        "react/jsx-props-no-spreading": "off"
+      }
     }
   ]
 }
+
