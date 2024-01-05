@@ -10,7 +10,7 @@ import {
   useStore, $, createContextId, component$, useContextProvider, Slot,
 } from '@builder.io/qwik';
 
-import { getLocalTagItems, setLocalTagItems } from '@todo-mono/shared';
+import { LOCAL_TAG_KEY, localStorageStore } from '@todo-mono/shared';
 import { CustomStore } from './TodosContext';
 import { deserializeTag, serializeTag } from '../utils/serializer';
 import { DeserializedTag } from '../types/todoType';
@@ -22,13 +22,20 @@ export default component$(() => {
   const tagsStore = useStore<TagsStore>({
     items: [],
     loadLocal$: $(function (this: TagsStore) {
-      const serializedTodos = getLocalTagItems();
+      const serializedTodos = localStorageStore.getLocalTagItems();
       const deserialized = deserializeTag(serializedTodos);
       this.items = [...deserialized];
     }),
     saveLocal$: $(function (this: TagsStore) {
       const serialized = serializeTag(this.items);
-      setLocalTagItems(serialized);
+      localStorageStore.setLocalTagItems(serialized);
+    }),
+    subscribeLocal$: $(function (this: TagsStore) {
+      this.loadLocal$();
+      window.addEventListener(LOCAL_TAG_KEY, this.loadLocal$);
+    }),
+    unsubscribeLocal$: $(function (this: TagsStore) {
+      window.removeEventListener(LOCAL_TAG_KEY, this.loadLocal$);
     }),
     addItem$: $(function (this: TagsStore, tag: DeserializedTag) {
       this.items = [...this.items, tag];

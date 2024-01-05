@@ -4,13 +4,15 @@ import {
   useStore, $, QRL, createContextId, component$, useContextProvider, Slot,
 } from '@builder.io/qwik';
 
-import { getLocalTodoItems, setLocalTodoItems } from '@todo-mono/shared';
+import { localStorageStore, LOCAL_TODO_KEY } from '@todo-mono/shared';
 import { addDays } from 'date-fns';
 import { deserializeTodo, serializeTodo } from '../utils/serializer';
 import { DeserializedTodo } from '../types/todoType';
 
 export interface CustomStore<T> {
   items: Array<T>;
+  subscribeLocal$: QRL<() => void>;
+  unsubscribeLocal$: QRL<() => void>;
   loadLocal$: QRL<() => void>;
   saveLocal$: QRL<() => void>;
   addItem$: QRL<(t: T) => void>;
@@ -25,13 +27,20 @@ export default component$(() => {
   const todosStore = useStore<TodosStore>({
     items: [],
     loadLocal$: $(function (this: TodosStore) {
-      const serializedTodos = getLocalTodoItems();
+      const serializedTodos = localStorageStore.getLocalTodoItems();
       const deserialized = deserializeTodo(serializedTodos);
       this.items = [...deserialized];
     }),
     saveLocal$: $(function (this: TodosStore) {
       const serialized = serializeTodo(this.items);
-      setLocalTodoItems(serialized);
+      localStorageStore.setLocalTodoItems(serialized);
+    }),
+    subscribeLocal$: $(function (this: TodosStore) {
+      this.loadLocal$();
+      window.addEventListener(LOCAL_TODO_KEY, this.loadLocal$);
+    }),
+    unsubscribeLocal$: $(function (this: TodosStore) {
+      window.removeEventListener(LOCAL_TODO_KEY, this.loadLocal$);
     }),
     addItem$: $(function (this: TodosStore, todo: DeserializedTodo) {
       this.items = [...this.items, todo];

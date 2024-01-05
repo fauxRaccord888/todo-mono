@@ -14,12 +14,16 @@ import ViteIcon from './Icons/ViteIcon';
 export default component$(() => {
   const todosStore = useContext(todosContext);
   const tagsStore = useContext(tagsContext);
-  useTask$(
-    () => {
-      todosStore.loadLocal$();
-      tagsStore.loadLocal$();
-    },
-  );
+
+  useTask$(({ cleanup }) => {
+    todosStore.subscribeLocal$();
+    tagsStore.subscribeLocal$();
+    cleanup(() => {
+      todosStore.unsubscribeLocal$();
+      tagsStore.unsubscribeLocal$();
+    });
+  });
+
   return (
     <div class="flex flex-col w-full place-items-center space-y-12 py-12 wanted-sans">
       <div class="w-[48rem] space-y-4 items-center">
