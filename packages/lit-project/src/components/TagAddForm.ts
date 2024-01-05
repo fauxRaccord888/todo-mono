@@ -3,9 +3,11 @@
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
-import { consume } from '@lit/context';
-import { Tag } from '@todo-mono/shared';
 import { live } from 'lit/directives/live.js';
+import { consume } from '@lit/context';
+
+/* utility */
+import { Tag } from '@todo-mono/shared';
 import { tagContext, tagContextProvider } from '../contexts/tagContext';
 import { COLORS, INITIAL_VALUE } from '../constants/tag';
 

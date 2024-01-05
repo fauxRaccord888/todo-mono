@@ -3,10 +3,12 @@
 import { html } from 'lit';
 import { map } from 'lit/directives/map.js';
 import { customElement, property, state } from 'lit/decorators.js';
-import { styleMap } from 'lit/directives/style-map.js';
-import { Todo, dueDateFormatter, yyyymmdd } from '@todo-mono/shared';
+
+/* utility */
+import { type Todo, dueDateFormatter, yyyymmdd } from '@todo-mono/shared';
 import { todoContextProvider } from '../contexts/todoContext';
 
+/* components */
 import './styledComponents/StyledTitle';
 import './styledComponents/StyledButton';
 import './styledComponents/RoundedContainer';

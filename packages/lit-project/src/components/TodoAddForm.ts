@@ -2,11 +2,13 @@
 /* lit */
 import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
+import { live } from 'lit/directives/live.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { consume } from '@lit/context';
+
+/* utility */
 import { CompletedRecord, Tag, Todo } from '@todo-mono/shared';
 import { addDays } from 'date-fns';
-import { live } from 'lit/directives/live.js';
 import { tagContext } from '../contexts/tagContext';
 import { todoContextProvider } from '../contexts/todoContext';
 import { INITIAL_VALUE } from '../constants/todo';
