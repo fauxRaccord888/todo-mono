@@ -100,7 +100,7 @@ export default component$(() => {
       </div>
 
       <div class="flex">
-        <div class="bg-slate-40 0 flex-grow flex justify-center space-x-4 place-items-center py-4">
+        <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>태그 추가</span>
           <select
             onChange$={handleSelectTag$}
