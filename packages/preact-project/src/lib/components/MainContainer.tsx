@@ -1,6 +1,6 @@
-import { type Dispatch } from 'preact/hooks';
-import { Tag, Todo } from '@todo-mono/shared';
-import { TagAction, TodoAction } from '../types/Reducer';
+import { useEffect } from 'preact/hooks';
+import useTodoStore from '../hooks/useTodoStore';
+import useTagStore from '../hooks/useTagStore';
 
 import SingleTodo from './SingleTodo';
 import StyledTitle from './styledComponents/StyledTitle';
@@ -10,17 +10,19 @@ import preactIcon from '../../assets/preact.svg';
 import TagAddForm from './TagAddForm';
 import TodoAddForm from './TodoAddForm';
 
-interface MainContainerProps {
-  todos: Todo[]
-  todoDispatch: Dispatch<TodoAction>
-  tags: Tag[]
-  tagDispatch: Dispatch<TagAction>
-}
+function MainContainer() {
+  const [todos, todoDispatch] = useTodoStore();
+  const [tags, tagDispatch] = useTagStore();
 
-function MainContainer(props: MainContainerProps) {
-  const {
-    todos, tags, todoDispatch, tagDispatch,
-  } = props;
+  useEffect(() => {
+    todoDispatch({ type: 'subscribe' });
+    tagDispatch({ type: 'subscribe' });
+    return (() => {
+      todoDispatch({ type: 'unsubscribe' });
+      tagDispatch({ type: 'unsubscribe' });
+    });
+  }, []);
+
   return (
     <div className="flex flex-col w-full place-items-center space-y-12 py-12 wanted-sans">
       <div className="space-y-4 w-full">

@@ -3,7 +3,7 @@ import { type Dispatch } from 'preact/hooks';
 import { useState } from 'preact/hooks';
 import { addDays } from 'date-fns';
 import { CompletedRecord, Tag, Todo } from '@todo-mono/shared';
-import { TodoAction } from '../types/Reducer';
+import { TodoAction } from '../types/Hooks';
 import { INITIAL_VALUE } from '../constants/todo';
 
 import StyledButton from './styledComponents/StyledButton';

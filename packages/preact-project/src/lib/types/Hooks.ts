@@ -1,7 +1,8 @@
 import { Tag, Todo } from '@todo-mono/shared';
 
 type DispatchActions<T> =
-    | { type: 'loadLocal' }
+    | { type: 'subscribe' }
+    | { type: 'unsubscribe' }
     | { type: 'addItem', payload: { item: T } };
 
 export type TodoAction = DispatchActions<Todo>

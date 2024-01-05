@@ -1,7 +1,7 @@
 import { type Dispatch } from 'preact/hooks';
 import { useState } from 'preact/hooks';
 import { Todo, dueDateFormatter, yyyymmdd } from '@todo-mono/shared';
-import { TodoAction } from '../types/Reducer';
+import { TodoAction } from '../types/Hooks';
 
 import RoundContainer from './styledComponents/RoundContainer';
 import StyledButton from './styledComponents/StyledButton';

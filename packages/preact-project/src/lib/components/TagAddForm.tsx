@@ -3,7 +3,7 @@ import { type Dispatch } from 'preact/hooks';
 import { useState } from 'preact/hooks';
 import { Tag } from '@todo-mono/shared';
 import { COLORS, INITIAL_VALUE } from '../constants/tag';
-import { TagAction } from '../types/Reducer';
+import { TagAction } from '../types/Hooks';
 
 import StyledButton from './styledComponents/StyledButton';
 
