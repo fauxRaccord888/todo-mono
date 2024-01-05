@@ -47,7 +47,7 @@ function SingleTodo(props: { todo: Todo, dispatch: Dispatch<TodoAction> }) {
         </RoundContainer>
         {todo.tags.map((tag, idx) => (
           // DEBUG idx in key
-          <RoundContainer key={`${tag.name} ${String(idx)}`} style={{ 'background': tag.color }}>
+          <RoundContainer key={`${tag.name} ${String(idx)}`} style={{ background: tag.color }}>
             { tag.name }
           </RoundContainer>
         ))}
@@ -71,7 +71,7 @@ function SingleTodo(props: { todo: Todo, dispatch: Dispatch<TodoAction> }) {
             </span>
           ))}
         </div>
-      ) : (null)}
+      )}
     </div>
   );
 }
