@@ -1,17 +1,26 @@
 import { ContextProvider, createContext } from '@lit/context';
-import { Todo, getLocalTodoItems, setLocalTodoItems } from '@todo-mono/shared';
+import { Todo, localStorageStore, LOCAL_TODO_KEY } from '@todo-mono/shared';
 
 export const todoContext = createContext<Todo[]>(Symbol('todos'));
 
 type TodoContext = typeof todoContext;
 class TodoContextProvider extends ContextProvider<TodoContext> {
+  subscribe() {
+    this.loadLocal();
+    window.addEventListener(LOCAL_TODO_KEY, this.loadLocal.bind(this));
+  }
+
+  unsubscribe() {
+    window.removeEventListener(LOCAL_TODO_KEY, this.loadLocal.bind(this));
+  }
+
   loadLocal() {
-    const localTodos = getLocalTodoItems();
+    const localTodos = localStorageStore.getLocalTodoItems();
     this.setValue([...localTodos]);
   }
 
   saveLocal() {
-    setLocalTodoItems(this.value);
+    localStorageStore.setLocalTodoItems([...this.value]);
   }
 
   addTodo(todo: Todo) {

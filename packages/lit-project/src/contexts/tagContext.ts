@@ -1,17 +1,26 @@
 import { ContextProvider, createContext } from '@lit/context';
-import { Tag, getLocalTagItems, setLocalTagItems } from '@todo-mono/shared';
+import { LOCAL_TAG_KEY, Tag, localStorageStore } from '@todo-mono/shared';
 
 export const tagContext = createContext<Tag[]>(Symbol('tags'));
 
 type TagContext = typeof tagContext;
 class TagContextProvider extends ContextProvider<TagContext> {
+  subscribe() {
+    this.loadLocal();
+    window.addEventListener(LOCAL_TAG_KEY, this.loadLocal.bind(this));
+  }
+
+  unsubscribe() {
+    window.removeEventListener(LOCAL_TAG_KEY, this.loadLocal.bind(this));
+  }
+
   loadLocal() {
-    const localTags = getLocalTagItems();
+    const localTags = localStorageStore.getLocalTagItems();
     this.setValue([...localTags]);
   }
 
   saveLocal() {
-    setLocalTagItems(this.value);
+    localStorageStore.setLocalTagItems(this.value);
   }
 
   addTag(tag: Tag) {

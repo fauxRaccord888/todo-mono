@@ -3,12 +3,15 @@
 import { customElement } from 'lit/decorators.js';
 import { html } from 'lit';
 import { consume } from '@lit/context';
-import { Todo } from '@todo-mono/shared';
 import { map } from 'lit/directives/map.js';
-import { todoContext } from '../contexts/todoContext';
 
 import LitIcon from '../assets/lit.svg';
 import ViteIcon from '../assets/vite.svg';
+/* utility */
+import type { Todo } from '@todo-mono/shared';
+import { todoContext, todoContextProvider } from '../contexts/todoContext';
+import { tagContextProvider } from '../contexts/tagContext';
+
 
 import './SingleTodo';
 import './TodoAddForm';
@@ -19,6 +22,15 @@ import { TailwindElement } from '../TailwindComponent/tailwind.element';
 
 @customElement('main-container')
 export default class MainContainer extends TailwindElement {
+  private todoProvider = todoContextProvider;
+  private tagProvider = tagContextProvider;
+
+  constructor() {
+    super();
+    this.todoProvider.subscribe();
+    this.tagProvider.subscribe();
+  }
+
   @consume({ context: todoContext, subscribe: true })
     todos!: Todo[];
 
