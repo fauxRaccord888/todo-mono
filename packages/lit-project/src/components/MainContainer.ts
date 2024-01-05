@@ -5,14 +5,13 @@ import { html } from 'lit';
 import { consume } from '@lit/context';
 import { map } from 'lit/directives/map.js';
 
-import LitIcon from '../assets/lit.svg';
-import ViteIcon from '../assets/vite.svg';
 /* utility */
 import type { Todo } from '@todo-mono/shared';
 import { todoContext, todoContextProvider } from '../contexts/todoContext';
 import { tagContextProvider } from '../contexts/tagContext';
 
-
+import './icons/LitIcon'
+import './icons/ViteIcon'
 import './SingleTodo';
 import './TodoAddForm';
 import './TagAddForm';
@@ -41,10 +40,11 @@ export default class MainContainer extends TailwindElement {
           <styled-title>
             <div class="flex items-center justify-center">
               Lit
-          <img class="icon" src=${LitIcon}><img>
-          + Vite
-          <img class="icon" src=${ViteIcon}><img>
-        </div>
+              <lit-icon class="w-12 h-12 m-4"></lit-icon>
+              +
+              Vite
+              <vite-icon class="w-16 h-16"></vite-icon>
+            </div>
           </styled-title>
         </div>
 
