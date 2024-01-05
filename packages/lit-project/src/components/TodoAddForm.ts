@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
-import { LitElement, html, css } from 'lit';
+/* lit */
+import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { consume } from '@lit/context';
@@ -10,8 +11,11 @@ import { tagContext } from '../contexts/tagContext';
 import { todoContextProvider } from '../contexts/todoContext';
 import { INITIAL_VALUE } from '../constants/todo';
 
+/* tailwind */
+import { TailwindElement } from '../TailwindComponent/tailwind.element';
+
 @customElement('todo-add-form')
-class TodoAddForm extends LitElement {
+class TodoAddForm extends TailwindElement {
   private todoProvider = todoContextProvider;
 
   @consume({ context: tagContext, subscribe: true })
@@ -159,68 +163,6 @@ class TodoAddForm extends LitElement {
     </div>
     `;
   }
-
-  static styles = css`
-    span {
-      font-size: 1.5rem;
-    }
-
-    select {
-      margin-left: 1rem;
-    }
-
-    .outer-container {
-        display: flex;
-        flex-direction: column;
-        border-radius: 1.5rem;
-        background-color: rgb(148 163 184);
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-    }  
-
-    .mid-container {
-        display: flex;
-    }
-
-    .inner-container {
-        display: flex;
-        flex-grow: 1;
-        justify-content: center;
-        place-items: center;
-        background-color: rgb(148 163, 184);
-        padding-top: 2rem;
-        padding-bottom: 2rem
-    }
-
-    .title-text-area {
-        width: 20rem;
-        height: 2.5rem;
-        padding: 0.5rem;
-        font-size: 1.5rem;
-        font-family: inherit;
-        margin-left: 1rem;
-    }
-
-    .number-input {
-        background-color: rgb(203 213 225);
-        width: 3rem;
-        text-align: end;
-        margin-left: 0.25rem;
-        font-size: inherit;
-    }
-
-    .tag {
-      margin-left: 0.5rem;
-    }
-
-    .add-todo-button {
-        width: 18rem;
-        justify-self: center;
-        place-self: center;
-        margin-top: 1rem;
-    }
-
-  `;
 }
 
 export default TodoAddForm;

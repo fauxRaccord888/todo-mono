@@ -1,0 +1,14 @@
+@import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.1/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+컴포넌트 단위로 tailwind component가 style을 오버라이딩
+따라서 상속이 일어나지 않음 
+불가피하게 이곳에서 전역 스타일 지정 
+*/
+
+:host {
+    font-family: "Wanted Sans Variable" !important;
+}

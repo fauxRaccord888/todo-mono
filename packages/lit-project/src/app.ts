@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
-import { LitElement, html } from 'lit';
+import { TailwindElement } from './TailwindComponent/tailwind.element';
+import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { todoContextProvider } from './contexts/todoContext';
 import { tagContextProvider } from './contexts/tagContext';
@@ -7,7 +8,7 @@ import './components/MainContainer';
 import './app.css';
 
 @customElement('main-app')
-export class App extends LitElement {
+export class App extends TailwindElement {
   private todoProvider = todoContextProvider;
   private tagProvider = tagContextProvider;
   constructor() {

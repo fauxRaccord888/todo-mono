@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
+/* lit */
 import { customElement } from 'lit/decorators.js';
-import { LitElement, css, html } from 'lit';
+import { html } from 'lit';
 import { consume } from '@lit/context';
 import { Todo } from '@todo-mono/shared';
 import { map } from 'lit/directives/map.js';
@@ -13,8 +14,11 @@ import './SingleTodo';
 import './TodoAddForm';
 import './TagAddForm';
 
+/* tailwind */
+import { TailwindElement } from '../TailwindComponent/tailwind.element';
+
 @customElement('main-container')
-export class MainContainer extends LitElement {
+export default class MainContainer extends TailwindElement {
   @consume({ context: todoContext, subscribe: true })
     todos!: Todo[];
 
@@ -44,26 +48,4 @@ export class MainContainer extends LitElement {
       </div>
     `;
   }
-
-  static styles = css`
-    .main-container {      
-      font-family: "Wanted Sans Variable" !important;
-      margin-left: 20%;
-      width: 60%;
-    }
-
-    .flex-container {
-      font-size: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .icon {
-      width: 2rem;
-      height: 2rem;
-    }
-  `;
 }
-
-export default MainContainer;

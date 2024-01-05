@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
-import { LitElement, html, css } from 'lit';
+/* lit */
+import { html } from 'lit';
 import { map } from 'lit/directives/map.js';
 import { customElement, property, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
@@ -10,8 +11,11 @@ import './styledComponents/StyledTitle';
 import './styledComponents/StyledButton';
 import './styledComponents/RoundedContainer';
 
+/* tailwind */
+import { TailwindElement } from '../TailwindComponent/tailwind.element';
+
 @customElement('single-todo')
-export class SingleTodo extends LitElement {
+export class SingleTodo extends TailwindElement {
   private todoProvider = todoContextProvider;
 
   @property({ attribute: false })
@@ -90,92 +94,6 @@ export class SingleTodo extends LitElement {
       </div>
     `;
   }
-
-  static styles = css`
-    div {
-      font-size: 24px;
-    }
-
-    .outer-container {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem;
-      margin-top: 2rem;
-      
-      border-style: solid;
-      border-width: 2px;
-      border-radius: 0.5rem;
-      border-color: rgb(30 41 59);
-    }
-    
-    .outer-container > div {
-      margin-top: 1rem;
-      margin-bottom: 1rem;
-    }
-  
-    .due-date-container {
-      display: flex;
-      flex-direction: center;
-      align-items: center;
-    }
-
-    .title-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem;
-      
-      border-style: solid;
-      border-width: 2px;
-      border-radius: 0.5rem;
-      border-color: rgb(30 41 59);
-    }
-
-    .tag-conatiner {
-      display: flex
-    }
-
-    .tag-container > rounded-container {
-      margin-right: 0.25rem;
-      margin-left: 0.25rem;
-    }
-
-    .tag-container > rounded-container:first-child {
-      margin-left: 0rem;
-    }
-
-    .importance-container {
-      background-color: rgb(251 191 36)
-    }
-
-    .interval-container {
-      background-color: rgb(251 146 60)
-    }
-
-    .toggle-complete-button {
-      width: 100%;
-    }
-
-    .completed-container {
-      display: flex;
-      flex-direction: column;
-      background-color: rgb(229 231 235);
-      border-radius: 0.5rem;
-    }
-
-    .completed-record {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-    }
-
-    .completed-date {
-      background-color: rgb(148 163 184);
-    }
-  `;
 }
 
 export default SingleTodo;

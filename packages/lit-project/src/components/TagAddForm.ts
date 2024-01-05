@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
-import { LitElement, html, css } from 'lit';
+/* lit */
+import { html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { styleMap } from 'lit/directives/style-map.js';
 import { consume } from '@lit/context';
@@ -8,8 +9,11 @@ import { live } from 'lit/directives/live.js';
 import { tagContext, tagContextProvider } from '../contexts/tagContext';
 import { COLORS, INITIAL_VALUE } from '../constants/tag';
 
+/* tailwind */
+import { TailwindElement } from '../TailwindComponent/tailwind.element';
+
 @customElement('tag-add-form')
-class TagAddForm extends LitElement {
+class TagAddForm extends TailwindElement {
   private tagProvider = tagContextProvider;
 
   @consume({ context: tagContext })
@@ -79,50 +83,6 @@ class TagAddForm extends LitElement {
     </div>
     `;
   }
-
-  static styles = css`
-    .outer-container {
-      display: flex;
-      flex-direction: column;
-      border-radius: 1.5rem;
-      background-color: rgb(148 163 184);
-      padding-top: 2rem;
-      padding-bottom: 2rem
-    }
-
-    .inner-container {
-      background-color: rgb(148 163 184);
-      display: flex;
-      flex-grow: 1;
-      justify-content: center;
-      place-items: center;
-      padding-top: 1rem;
-      padding-bottom: 1rem
-    }
-
-    .inner-container > span {
-      margin-right: 1rem;
-    }
-
-    .tag-text-area {
-      width: 20rem;
-      height: 2.5rem;
-      padding: 0.5rem;
-      font-family: inherit;
-      font-size: inherit;
-    }
-
-    .flex-container {
-      display: flex
-    }
-
-    .add-tag-button {
-      width: 18rem;
-      justify-self: center;
-      place-self: center;
-      margin-top: 1rem;
-    }
-  `;
 }
 
 export default TagAddForm;

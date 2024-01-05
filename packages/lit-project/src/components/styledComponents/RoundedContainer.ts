@@ -1,9 +1,25 @@
 /* eslint-disable import/extensions */
-import { LitElement, css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { html, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import { TailwindElement } from '../../TailwindComponent/tailwind.element';
 
 @customElement('rounded-container')
-export class RoundedContainer extends LitElement {
+export class RoundedContainer extends TailwindElement {
+  @property()
+    class?: string = '';
+
+  @property()
+    color?: string = '';
+
+  static styles = [
+    ...TailwindElement.styles,
+    css`
+      span {
+        background-color: var(--background);
+      }
+    `,
+  ];
+
   render() {
     return html`
       <span>
@@ -11,14 +27,6 @@ export class RoundedContainer extends LitElement {
       </span>
   `;
   }
-
-  static styles = css`
-    span {
-        padding: 0.5rem;
-        border-radius: 0.75rem;
-        background-color: inherit;
-    }
-  `;
 }
 
 export default RoundedContainer;
