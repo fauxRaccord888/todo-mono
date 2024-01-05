@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ReactApp from "../components/frameworkComponents/react/App"
+import SvelteApp from "../components/frameworkComponents/svelte/App.svelte"
+import VueApp from "../components/frameworkComponents/vue/App.vue"
+import SolidApp from "../components/frameworkComponents/solid/App"
+import LitApp from "../components/frameworkComponents/lit/App"
+import PreactApp from "../components/frameworkComponents/preact/App"
+
+import Title from "../components/Title.astro"
+import Description from "../components/Description.astro"
+import Showcase from '../components/Showcase.svelte';
+---
+
+<Layout>
+	<main class="flex flex-col w-full items-center space-y-12 py-12 wanted-sans">
+		<Title>TODO 6</Title>
+		<Description />
+		<Showcase client:only="svelte">
+			<ReactApp slot="react" client:only="react" />
+			<SvelteApp slot="svelte" client:only="svelte" />
+			<SolidApp slot="solid" client:only="solid" />
+			<LitApp slot="lit" client:only="lit" />
+			<VueApp slot="vue" client:only="vue" />
+			<PreactApp slot="preact" client:only="preact" />
+		</Showcase>
+	</main>
+</Layout>
+
+<style>
+</style>
