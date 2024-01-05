@@ -5,8 +5,8 @@ import useTagStore from '../hooks/useTagStore';
 import SingleTodo from './SingleTodo';
 import StyledTitle from './styledComponents/StyledTitle';
 
-import viteIcon from '../../assets/vite.svg';
-import preactIcon from '../../assets/preact.svg';
+import ViteIcon from './icons/ViteIcon';
+import PreactIcon from './icons/PreactIcon'
 import TagAddForm from './TagAddForm';
 import TodoAddForm from './TodoAddForm';
 
@@ -24,15 +24,15 @@ function MainContainer() {
   }, []);
 
   return (
-    <div className="flex flex-col w-full place-items-center space-y-12 py-12 wanted-sans">
+    <div className="flex flex-col place-items-center space-y-12 wanted-sans">
       <div className="space-y-4 w-full">
         <StyledTitle>
           <div className="flex items-center justify-center">
             Preact
-            <img src={preactIcon} alt="react-icon" className="w-16 h-16" />
+            <PreactIcon className="w-16 h-16"/>
             +
             Vite
-            <img src={viteIcon} alt="vite-icon" className="w-16 h-16" />
+            <ViteIcon className="w-16 h-16"/>
           </div>
         </StyledTitle>
       </div>
