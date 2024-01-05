@@ -76,22 +76,22 @@ class TodoAddForm extends TailwindElement {
 
   render() {
     return html`
-    <div class="outer-container">
-      <div class="inner-container">
+    <div class="flex flex-col rounded-3xl bg-slate-400 py-8">
+      <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
         <span>할 일 제목</span>
         <textarea
           .value=${live(this.newTodo.title)}
-          class="title-text-area"
+          class="w-80 h-10 p-2"
           @input=${this.handleInputTitle}
         ></textarea>
       </div>
 
-      <div class="inner-container">
-        <div class="inner-container">
+      <div class="flex">
+        <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>중요도</span>
           <input
             type="number"
-            class="number-input"
+            class="bg-slate-300 w-12 text-end"
             min=${1}
             max=${5}
             .value=${live(String(this.newTodo.importance))}
@@ -99,22 +99,22 @@ class TodoAddForm extends TailwindElement {
           />
 
         </div>
-        <div class="inner-container">
+        <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>반복 주기</span>
           <input
             type="number"
-            class="number-input"
+            class="bg-slate-300 w-12 text-end"
             min=${0}
             max=${31}
             .value=${live(String(this.newTodo.repeatInterval))}
             @input=${this.handleInputInterval}
           />
         </div>
-        <div class="inner-container">
+        <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>마감까지 남은 일수</span>
           <input
             type="number"
-            class="number-input"
+            class="bg-slate-300 w-12 text-end"
             min=${0}
             max=${31}
             .value=${live(String(this.newTodo.dueDatePlus))}
@@ -123,8 +123,8 @@ class TodoAddForm extends TailwindElement {
         </div>
       </div>
 
-      <div class="mid-container">
-        <div class="inner-container">
+      <div class="flex">
+        <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>태그 추가</span>
           <select
             id="tag-select"
@@ -139,12 +139,12 @@ class TodoAddForm extends TailwindElement {
             `)}
           </select>
         </div>
-        <div class="inner-container">
+        <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>현재 태그</span>
           ${this.newTodoTags.map((tag) => html`
             <rounded-container
               class="tag"
-              style=${styleMap({ backgroundColor: tag.color })}
+              color="${tag.color}"
             >
                 ${tag.name}
             </rounded-container>
@@ -155,7 +155,7 @@ class TodoAddForm extends TailwindElement {
 
       <styled-button
         label="할 일 추가하기 버튼"
-        class="add-todo-button"
+        class="w-72 justify-self-center place-self-center mt-4"
         @click=${this.handleAddNewTodo}
       >
         추가하기

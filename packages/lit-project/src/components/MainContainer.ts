@@ -24,26 +24,31 @@ export default class MainContainer extends TailwindElement {
 
   render() {
     return html`
-      <div class="main-container">
-        <div class="flex-container">
-          Lit
+    <div class="flex flex-col place-items-center space-y-12 wanted-sans">
+        <div class="space-y-4 w-full">
+          <styled-title>
+            <div class="flex items-center justify-center">
+              Lit
           <img class="icon" src=${LitIcon}><img>
           + Vite
           <img class="icon" src=${ViteIcon}><img>
         </div>
-        <div>
+          </styled-title>
+        </div>
+
+        <div class="space-y-4 w-full">
           <styled-title>📝 할 일 추가하기</styled-title>
           <todo-add-form></todo-add-form>
         </div>
 
-        <div>
+        <div class="space-y-4 w-full">
           <styled-title>#️⃣ 태그 추가하기</styled-title>
           <tag-add-form></tag-add-form>
         </div>
   
-        <div>
+        <div class="space-y-4 w-full">
           <styled-title>⛳ 할 일 목록</styled-title>
-          ${map(this.todos, (t) => html`<single-todo class="single-todo-container" .todo=${t}></single-todo>`)}
+          ${map(this.todos, (t) => html`<single-todo .todo=${t}></single-todo>`)}
         </div>
       </div>
     `;

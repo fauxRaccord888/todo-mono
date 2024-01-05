@@ -22,7 +22,12 @@ export class RoundedContainer extends TailwindElement {
 
   render() {
     return html`
-      <span>
+      <style>
+        span {
+          --background: ${this.color ?? ''}
+        }
+      </style>
+      <span class="p-2 rounded-xl ${this.class}">
         <slot></slot>
       </span>
   `;

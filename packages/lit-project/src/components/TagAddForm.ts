@@ -41,18 +41,18 @@ class TagAddForm extends TailwindElement {
 
   render() {
     return html`
-    <div class="outer-container">
-      <div class="inner-container">
+    <div class="flex flex-col rounded-3xl bg-slate-400 py-8">
+      <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
         <span>태그 제목</span>
         <textarea
           .value=${live(this.newTag.name)}
           @input=${this.handleInputTagName}
-          class="tag-text-area"
+          class="w-80 h-10 p-2"
         ></textarea>
       </div>
 
-      <div class="flex-container">
-        <div class="inner-container">
+      <div class="flex">
+        <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <span>태그 색상</span>
           <select
             .value=${live(this.newTag.color)}
@@ -70,10 +70,10 @@ class TagAddForm extends TailwindElement {
           </select>
         </div>
 
-        <div class="inner-container">
+        <div class="bg-slate-400 flex-grow flex justify-center space-x-4 place-items-center py-4">
           <styled-button
             label="태그 추가하기"
-            class="add-tag-button"
+            class="w-72 justify-self-center place-self-center mt-4"
             @click=${this.handleAddNewTag}
           >
             추가하기

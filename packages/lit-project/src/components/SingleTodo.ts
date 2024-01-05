@@ -37,14 +37,14 @@ export class SingleTodo extends TailwindElement {
 
   render() {
     return html`
-      <div class="outer-container">
-        <div class="due-date-container">
+      <div class="flex-col space-y-4 my-4 border-2 border-slate-800 p-4 rounded-lg">
+        <div class="flex items-center space-x-2">
           <span>
             ${dueDateFormatter(this.todo.dueDate)}
           </span>
         </div>
 
-        <div class="title-container">
+        <div class="flex items-center p-2 border-slate-800 border-2 rounded-lg justify-between">
           <span>
             ${this.todo.title}
           </span>
@@ -53,18 +53,18 @@ export class SingleTodo extends TailwindElement {
           </styled-button>
         </div>
 
-        <div class="tag-container">
-          <rounded-container class="importance-container">
+        <div class="flex space-x-1">
+          <rounded-container class="bg-amber-400">
             중요도:
             ${this.todo.importance}
           </rounded-container>
-          <rounded-container class="interval-container">
+          <rounded-container class="bg-orange-400">
             반복 주기:
             ${this.todo.repeatInterval}
             일
           </rounded-container>
             ${this.todo.tags.map((tag) => (html`
-              <rounded-container style=${styleMap({ backgroundColor: tag.color })}>
+              <rounded-container color="${tag.color}">
                 ${tag.name}
               </rounded-container>
             `))}
@@ -72,7 +72,7 @@ export class SingleTodo extends TailwindElement {
 
         <div>
           <styled-button 
-            class="toggle-complete-button" 
+            class="w-full"
             label="완료 내역 토글" 
             @click="${this.handleToggleCompleted}"
           >
@@ -81,11 +81,11 @@ export class SingleTodo extends TailwindElement {
         </div>
 
         ${this.isCompletedOpen ? html`
-          <div class="completed-container">
+          <div class="flex flex-col bg-gray-200 rounded-lg">
             ${map(this.todo.completed, (record) => html`
-                <span class="completed-record">
+                <span class="flex justify-between items-center p-2">
                   ${record.memo}
-                  <rounded-container class="completed-date">
+                  <rounded-container class="bg-slate-400">
                     ${yyyymmdd(record.completed)}
                   </rounded-container>
                 </span>

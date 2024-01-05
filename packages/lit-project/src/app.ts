@@ -19,8 +19,10 @@ export class App extends TailwindElement {
 
   render() {
     return html`
-      <div>
-        <main-container></main-container>
+      <div class="flex justify-center wanted-sans">
+        <div class="w-[48rem]">
+          <main-container></main-container>
+        </div>
       </div>
     `;
   }
